@@ -1,5 +1,5 @@
 ---
-titre: Chef de projets AMOA DSI - Organisation publique
+titre: Chef de projet AMOA DSI - Organisation publique
 description: Pilotage de la DSI d'un organisme public français avec un budget
   annuel de 300M€ et un portefeuille de projets de 3Md€ sur 10 ans.
 categorie: Consulting
