@@ -12,6 +12,19 @@
   <!-- Netlify Identity Widget (intercepte les tokens invite/confirmation) -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+<!-- Intercepte les tokens Netlify Identity dans l'URL -->
+<script>
+  if (window.location.hash) {
+    var hash = window.location.hash;
+    if (hash.includes('invite_token') || 
+        hash.includes('confirmation_token') || 
+        hash.includes('recovery_token') || 
+        hash.includes('email_change_token')) {
+      window.location.href = '/admin/' + hash;
+    }
+  }
+</script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
