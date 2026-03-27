@@ -55,24 +55,56 @@ document.addEventListener('DOMContentLoaded', function () {
     bar.dataset.width = w;
   });
 
-  // ── Portfolio filter ────────────────────────────────────────
+  // ── Portfolio filter + voir plus ────────────────────────────
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectCards = Array.from(document.querySelectorAll('.project-card'));
+  const VISIBLE_MAX = 6;
+  let showAll = false;
+
+  function applyFilter(filter) {
+    const matching = projectCards.filter(card =>
+      filter === 'all' || card.dataset.category === filter
+    );
+    const hidden = projectCards.filter(card =>
+      filter !== 'all' && card.dataset.category !== filter
+    );
+    // Masquer les non-correspondants
+    hidden.forEach(card => { card.style.display = 'none'; card.dataset.hiddenByFilter = '1'; });
+    matching.forEach(card => { delete card.dataset.hiddenByFilter; });
+    // Appliquer la limite visible
+    applyLimit(matching);
+  }
+
+  function applyLimit(visible) {
+    visible = visible || projectCards.filter(c => !c.dataset.hiddenByFilter);
+    visible.forEach((card, i) => {
+      card.style.display = (!showAll && i >= VISIBLE_MAX) ? 'none' : '';
+    });
+    // Bouton voir plus
+    const btn = document.getElementById('portfolio-voir-plus');
+    if (btn) btn.style.display = visible.length > VISIBLE_MAX ? '' : 'none';
+  }
+
+  // Init : afficher les 6 premiers
+  applyFilter('all');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      projectCards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      showAll = false;
+      applyFilter(btn.dataset.filter);
     });
   });
+
+  const voirPlusBtn = document.getElementById('portfolio-voir-plus');
+  if (voirPlusBtn) {
+    voirPlusBtn.addEventListener('click', () => {
+      showAll = true;
+      applyLimit();
+      voirPlusBtn.style.display = 'none';
+    });
+  }
 
   // ── Testimonials Slider ────────────────────────────────────
   const slider = document.querySelector('.slider');

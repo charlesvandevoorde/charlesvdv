@@ -25,15 +25,12 @@ permalink: /fr/index.html
     <!-- Texte à DROITE -->
     <div class="hero__content fade-in">
       <h1 class="hero__title">Charles<br>Van&nbsp;de&nbsp;Voorde</h1>
-      <p class="hero__subtitle">Expert Digital · IA &nbsp;·&nbsp; Automatisation &nbsp;·&nbsp; Marketing</p>
-      <p class="hero__founder">Fondateur de VDV Digital</p>
-      <p class="hero__tagline">
-        J'ai créé VDV Digital afin d'aider les entreprises dans la gestion
-        de leur business, et gagner du temps grâce à l'IA et à l'automatisation.
-      </p>
+      <p class="hero__subtitle">{{ home_fr.hero_sous_titre }}</p>
+      <p class="hero__founder">{{ home_fr.hero_fondateur }}</p>
+      <p class="hero__tagline">{{ home_fr.hero_tagline }}</p>
       <div class="hero__ctas">
-        <a href="#portfolio" class="btn btn--primary">Voir mes projets</a>
-        <a href="#contact" class="btn btn--outline">Travaillons ensemble</a>
+        <a href="#portfolio" class="btn btn--primary">{{ home_fr.hero_cta_principal }}</a>
+        <a href="#contact" class="btn btn--outline">{{ home_fr.hero_cta_secondaire }}</a>
       </div>
     </div>
 
@@ -49,12 +46,9 @@ permalink: /fr/index.html
 ══════════════════════════════════════════════ -->
 <section class="section section--white" id="services">
   <div class="container">
-    <p class="section-label">Ce que je propose</p>
-    <h2 class="section-title fade-in">Mes services</h2>
-    <p class="section-intro fade-in">
-      De l'idée à l'exécution — j'accompagne les entreprises et les entrepreneurs
-      dans leur transformation digitale avec une approche personnalisée, pragmatique et orientée résultat.
-    </p>
+    <p class="section-label">{{ home_fr.services_label }}</p>
+    <h2 class="section-title fade-in">{{ home_fr.services_titre }}</h2>
+    <p class="section-intro fade-in">{{ home_fr.services_intro }}</p>
     <div class="services__grid fade-in-children">
 
       <div class="service-card">
@@ -123,115 +117,41 @@ permalink: /fr/index.html
 
     <div class="portfolio__grid">
 
-      <!-- 1. Refonte site coaching -->
-      <div class="project-card" data-category="marketing">
+      {% for projet in collections.projets_fr %}
+      {% set cat = projet.data.categorie | lower %}
+      <div class="project-card" data-category="{{ cat }}">
         <div class="project-card__thumb">
-          <a href="https://vdevconsulting.com" target="_blank" rel="noopener" aria-label="Voir le site vdevconsulting.com">
-            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=338&fit=crop" alt="Refonte site coaching — vdevconsulting.com" />
-            <div class="project-card__overlay"><span>Voir ↗</span></div>
+          {% if projet.data.type == "externe" %}
+          <a href="{{ projet.data.url_externe }}" target="_blank" rel="noopener" aria-label="Voir {{ projet.data.titre }}">
+          {% else %}
+          <a href="/fr/projets/{{ projet.fileSlug }}/" aria-label="Voir {{ projet.data.titre }}">
+          {% endif %}
+            <img
+              src="{{ projet.data.image }}"
+              alt="{{ projet.data.titre }}"
+              {% if projet.data.image_style == "contain" %}style="object-fit:contain; background:#f0ede6; padding:1.5rem;"{% endif %}
+            />
+            <div class="project-card__overlay">
+              <span>{% if projet.data.type == "externe" %}Voir ↗{% else %}Voir →{% endif %}</span>
+            </div>
           </a>
         </div>
         <div class="project-card__body">
-          <span class="project-card__tag">SEO · Charte Graphique</span>
-          <h3 class="project-card__title">Refonte Site de Coaching</h3>
-          <p class="project-card__desc">
-            Refonte complète du site vdevconsulting.com — nouvelle charte graphique,
-            optimisation SEO technique et éditoriale, amélioration de l'expérience utilisateur.
-          </p>
+          <span class="project-card__tag">{{ projet.data.tag_affiche or projet.data.categorie }}</span>
+          <h3 class="project-card__title">{{ projet.data.titre }}</h3>
+          <p class="project-card__desc">{{ projet.data.description }}</p>
         </div>
       </div>
-
-      <!-- 2. Outil propositions commerciales IA -->
-      <div class="project-card" data-category="ia">
-        <div class="project-card__thumb">
-          <a href="/fr/projets/outil-proposals-ia/" aria-label="Voir le projet outil propositions commerciales">
-            <img src="https://images.unsplash.com/photo-1655635643532-fa9ba2648cbe?w=600&h=338&fit=crop" alt="Outil IA propositions commerciales" />
-            <div class="project-card__overlay"><span>Voir →</span></div>
-          </a>
-        </div>
-        <div class="project-card__body">
-          <span class="project-card__tag">IA · Automatisation</span>
-          <h3 class="project-card__title">Outil de Propositions Commerciales IA</h3>
-          <p class="project-card__desc">
-            Création d'un outil automatisé de génération de propositions commerciales,
-            boosté par IA — réduit le temps de production de 80%.
-          </p>
-        </div>
-      </div>
-
-      <!-- 3. AMOA DSI -->
-      <div class="project-card" data-category="consulting">
-        <div class="project-card__thumb">
-          <a href="/fr/projets/amoa-dsi/" aria-label="Voir le projet AMOA DSI">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=338&fit=crop" alt="AMOA DSI — Organisation publique" />
-            <div class="project-card__overlay"><span>Voir →</span></div>
-          </a>
-        </div>
-        <div class="project-card__body">
-          <span class="project-card__tag">Consulting · AMOA</span>
-          <h3 class="project-card__title">AMOA DSI — Organisation Publique</h3>
-          <p class="project-card__desc">
-            Implémentation d'un outil SaaS au sein d'une DSI d'organisation publique —
-            cadrage, conduite du changement, formation des équipes.
-          </p>
-        </div>
-      </div>
-
-      <!-- 4. Instagram @mooodyy_ -->
-      <div class="project-card" data-category="crea">
-        <div class="project-card__thumb">
-          <a href="https://www.instagram.com/mooodyy_/" target="_blank" rel="noopener" aria-label="Voir le compte Instagram @mooodyy_">
-            <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=600&h=338&fit=crop" alt="Compte Instagram @mooodyy_ — Photographie" />
-            <div class="project-card__overlay"><span>Voir ↗</span></div>
-          </a>
-        </div>
-        <div class="project-card__body">
-          <span class="project-card__tag">Photographie · Side Projet</span>
-          <h3 class="project-card__title">@mooodyy_ — Compte Instagram Pro</h3>
-          <p class="project-card__desc">
-            Compte Instagram dédié à la photographie — ambiances urbaines,
-            voyages, portraits. Un projet personnel autour de la création visuelle.
-          </p>
-        </div>
-      </div>
-
-      <!-- 5. Prestige Club 2022 -->
-      <div class="project-card" data-category="marketing">
-        <div class="project-card__thumb">
-          <a href="https://www.youtube.com/watch?v=JeMU2fduKCk" target="_blank" rel="noopener" aria-label="Voir la vidéo Prestige Club 2022">
-            <img src="/assets-source/assets_oldsite/Approach People Recruitment logo.png" alt="Prestige Club 2022 — Approach People" style="object-fit:contain; background:#f0ede6; padding:1.5rem;" />
-            <div class="project-card__overlay"><span>Voir ↗</span></div>
-          </a>
-        </div>
-        <div class="project-card__body">
-          <span class="project-card__tag">Marketing · Vidéo</span>
-          <h3 class="project-card__title">Prestige Club 2022 — Approach People</h3>
-          <p class="project-card__desc">
-            Vidéo de promotion de l'événement interne Prestige Club 2022 —
-            réalisée dans le cadre du poste de Responsable Marketing.
-          </p>
-        </div>
-      </div>
-
-      <!-- 6. Prestige Club 2021 -->
-      <div class="project-card" data-category="marketing">
-        <div class="project-card__thumb">
-          <a href="http://youtube.com/watch?v=ghFiuIaXzXI" target="_blank" rel="noopener" aria-label="Voir la vidéo Prestige Club 2021">
-            <img src="/assets-source/assets_oldsite/Approach People Recruitment logo.png" alt="Prestige Club 2021 — Approach People" style="object-fit:contain; background:#f0ede6; padding:1.5rem;" />
-            <div class="project-card__overlay"><span>Voir ↗</span></div>
-          </a>
-        </div>
-        <div class="project-card__body">
-          <span class="project-card__tag">Marketing · Vidéo</span>
-          <h3 class="project-card__title">Prestige Club 2021 — Approach People</h3>
-          <p class="project-card__desc">
-            Vidéo de promotion de l'événement interne Prestige Club 2021 —
-            conception, script et production dans le cadre du poste de Responsable Marketing.
-          </p>
-        </div>
-      </div>
+      {% endfor %}
 
     </div>
+
+    <div style="text-align:center; margin-top:2.5rem;">
+      <button id="portfolio-voir-plus" class="btn btn--outline" style="display:none;">
+        Voir plus de projets ↓
+      </button>
+    </div>
+
   </div>
 </section>
 

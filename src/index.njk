@@ -6,10 +6,26 @@ eleventyExcludeFromCollections: true
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/fr/" />
   <title>Redirection...</title>
+  <script>
+    (function() {
+      var hash = window.location.hash;
+      if (hash && (
+        hash.includes('invite_token') ||
+        hash.includes('confirmation_token') ||
+        hash.includes('recovery_token') ||
+        hash.includes('email_change_token')
+      )) {
+        // Token Netlify Identity détecté → rediriger vers /admin/
+        window.location.replace('/admin/' + hash);
+      } else {
+        // Pas de token → rediriger vers le site en français
+        window.location.replace('/fr/');
+      }
+    })();
+  </script>
 </head>
 <body>
-  <p>Redirection vers <a href="/fr/">/fr/</a></p>
+  <p>Chargement...</p>
 </body>
 </html>

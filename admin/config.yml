@@ -2,8 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-# Netlify Identity
-identity_url: https://your-site.netlify.app
 media_folder: "assets-source/uploads"
 public_folder: "/assets-source/uploads"
 
@@ -11,17 +9,71 @@ locale: fr
 
 collections:
 
+  # ── Page d'accueil ───────────────────────────────────────────
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home_fr"
+        label: "Page d'accueil (FR)"
+        file: "src/_data/home_fr.json"
+        fields:
+          - label: "Hero — Sous-titre"
+            name: "hero_sous_titre"
+            widget: "string"
+          - label: "Hero — Fondateur"
+            name: "hero_fondateur"
+            widget: "string"
+          - label: "Hero — Accroche"
+            name: "hero_tagline"
+            widget: "text"
+          - label: "Hero — Bouton principal"
+            name: "hero_cta_principal"
+            widget: "string"
+          - label: "Hero — Bouton secondaire"
+            name: "hero_cta_secondaire"
+            widget: "string"
+          - label: "Services — Label"
+            name: "services_label"
+            widget: "string"
+          - label: "Services — Titre"
+            name: "services_titre"
+            widget: "string"
+          - label: "Services — Intro"
+            name: "services_intro"
+            widget: "text"
+          - label: "Portfolio — Label"
+            name: "portfolio_label"
+            widget: "string"
+          - label: "Portfolio — Titre"
+            name: "portfolio_titre"
+            widget: "string"
+          - label: "Témoignages — Label"
+            name: "temoignages_label"
+            widget: "string"
+          - label: "Témoignages — Titre"
+            name: "temoignages_titre"
+            widget: "string"
+          - label: "Contact — Label"
+            name: "contact_label"
+            widget: "string"
+          - label: "Contact — Titre"
+            name: "contact_titre"
+            widget: "string"
+          - label: "Contact — Intro"
+            name: "contact_intro"
+            widget: "text"
+
   # ── Projets FR ──────────────────────────────────────────────
   - name: "projets_fr"
     label: "Projets (FR)"
-    folder: "content/projets/fr"
+    folder: "src/content/projets/fr"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
       - { label: "Description courte", name: "description", widget: "text" }
       - { label: "Catégorie", name: "categorie", widget: "select",
-          options: ["Consulting", "Marketing", "Média", "Digital", "Design"] }
+          options: ["Consulting", "Marketing", "Média", "Digital", "Design", "IA"] }
       - { label: "Type", name: "type", widget: "select",
           options: ["interne", "externe"] }
       - { label: "URL externe (si type = externe)", name: "url_externe",
@@ -37,62 +89,10 @@ collections:
       - { label: "Résultats", name: "resultats", widget: "text",
           required: false }
 
-  # ── Projets EN ──────────────────────────────────────────────
-  - name: "projets_en"
-    label: "Projects (EN)"
-    folder: "content/projets/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "titre", widget: "string" }
-      - { label: "Short description", name: "description", widget: "text" }
-      - { label: "Category", name: "categorie", widget: "select",
-          options: ["Consulting", "Marketing", "Media", "Digital", "Design"] }
-      - { label: "Type", name: "type", widget: "select",
-          options: ["interne", "externe"] }
-      - { label: "External URL (if type = externe)", name: "url_externe",
-          widget: "string", required: false }
-      - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Display order", name: "order", widget: "number",
-          default: 99, required: false }
-      - { label: "Context", name: "contexte", widget: "text", required: false }
-      - { label: "Challenge", name: "problematique", widget: "text",
-          required: false }
-      - { label: "Solution", name: "solution", widget: "text",
-          required: false }
-      - { label: "Results", name: "resultats", widget: "text",
-          required: false }
-
-  # ── Projets PT-BR ───────────────────────────────────────────
-  - name: "projets_ptbr"
-    label: "Projetos (PT-BR)"
-    folder: "content/projets/pt-br"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "titre", widget: "string" }
-      - { label: "Descrição curta", name: "description", widget: "text" }
-      - { label: "Categoria", name: "categorie", widget: "select",
-          options: ["Consultoria", "Marketing", "Mídia", "Digital", "Design"] }
-      - { label: "Tipo", name: "type", widget: "select",
-          options: ["interne", "externe"] }
-      - { label: "URL externa (se tipo = externe)", name: "url_externe",
-          widget: "string", required: false }
-      - { label: "Imagem", name: "image", widget: "image", required: false }
-      - { label: "Ordem de exibição", name: "order", widget: "number",
-          default: 99, required: false }
-      - { label: "Contexto", name: "contexte", widget: "text", required: false }
-      - { label: "Desafio", name: "problematique", widget: "text",
-          required: false }
-      - { label: "Solução", name: "solution", widget: "text",
-          required: false }
-      - { label: "Resultados", name: "resultats", widget: "text",
-          required: false }
-
   # ── Témoignages FR ──────────────────────────────────────────
   - name: "temoignages_fr"
     label: "Témoignages (FR)"
-    folder: "content/temoignages/fr"
+    folder: "src/content/temoignages/fr"
     create: true
     slug: "{{slug}}"
     fields:
@@ -102,36 +102,10 @@ collections:
       - { label: "Entreprise", name: "entreprise", widget: "string" }
       - { label: "Ordre", name: "order", widget: "number", default: 99 }
 
-  # ── Témoignages EN ──────────────────────────────────────────
-  - name: "temoignages_en"
-    label: "Testimonials (EN)"
-    folder: "content/temoignages/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Text", name: "texte", widget: "text" }
-      - { label: "Name", name: "nom", widget: "string" }
-      - { label: "Position", name: "poste", widget: "string" }
-      - { label: "Company", name: "entreprise", widget: "string" }
-      - { label: "Order", name: "order", widget: "number", default: 99 }
-
-  # ── Témoignages PT-BR ───────────────────────────────────────
-  - name: "temoignages_ptbr"
-    label: "Depoimentos (PT-BR)"
-    folder: "content/temoignages/pt-br"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Texto", name: "texte", widget: "text" }
-      - { label: "Nome", name: "nom", widget: "string" }
-      - { label: "Cargo", name: "poste", widget: "string" }
-      - { label: "Empresa", name: "entreprise", widget: "string" }
-      - { label: "Ordem", name: "order", widget: "number", default: 99 }
-
   # ── Services FR ─────────────────────────────────────────────
   - name: "services_fr"
     label: "Services (FR)"
-    folder: "content/services/fr"
+    folder: "src/content/services/fr"
     create: true
     slug: "{{slug}}"
     fields:
@@ -139,27 +113,3 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Icône (emoji)", name: "icone", widget: "string" }
       - { label: "Ordre", name: "order", widget: "number", default: 99 }
-
-  # ── Services EN ─────────────────────────────────────────────
-  - name: "services_en"
-    label: "Services (EN)"
-    folder: "content/services/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "titre", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon (emoji)", name: "icone", widget: "string" }
-      - { label: "Order", name: "order", widget: "number", default: 99 }
-
-  # ── Services PT-BR ──────────────────────────────────────────
-  - name: "services_ptbr"
-    label: "Serviços (PT-BR)"
-    folder: "content/services/pt-br"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "titre", widget: "string" }
-      - { label: "Descrição", name: "description", widget: "text" }
-      - { label: "Ícone (emoji)", name: "icone", widget: "string" }
-      - { label: "Ordem", name: "order", widget: "number", default: 99 }

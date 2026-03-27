@@ -2,7 +2,7 @@
 layout: base.njk
 lang: fr
 pagination:
-  data: collections.projets_fr
+  data: collections.projets_fr_internes
   size: 1
   alias: projet
 permalink: /fr/projets/{{ projet.fileSlug }}/index.html
@@ -17,7 +17,7 @@ eleventyComputed:
     <a href="/fr/#portfolio" class="project-detail__back">← Retour aux projets</a>
 
     <p class="section-label">{{ projet.data.categorie }}</p>
-    <h1 style="font-family: var(--font-title); margin-bottom: 1rem;">{{ projet.data.titre }}</h1>
+    <h1 style="font-family: var(--font-title); margin-bottom: 1rem; text-align: center;">{{ projet.data.titre }}</h1>
     <p style="color:var(--color-text-muted); font-size:1.1rem; margin-bottom:2.5rem;">{{ projet.data.description }}</p>
 
     {% if projet.data.image %}
