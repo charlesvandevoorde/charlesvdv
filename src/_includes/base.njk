@@ -9,21 +9,23 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets-source/vdv_logo_square.png" />
 
-  <!-- Netlify Identity Widget (intercepte les tokens invite/confirmation) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- DOIT ÊTRE EN PREMIER : intercepte les tokens avant que le widget se charge -->
+  <script>
+    (function() {
+      var hash = window.location.hash;
+      if (hash && (
+        hash.includes('invite_token') ||
+        hash.includes('confirmation_token') ||
+        hash.includes('recovery_token') ||
+        hash.includes('email_change_token')
+      )) {
+        window.location.replace('/admin/' + hash);
+      }
+    })();
+  </script>
 
-<!-- Intercepte les tokens Netlify Identity dans l'URL -->
-<script>
-  if (window.location.hash) {
-    var hash = window.location.hash;
-    if (hash.includes('invite_token') || 
-        hash.includes('confirmation_token') || 
-        hash.includes('recovery_token') || 
-        hash.includes('email_change_token')) {
-      window.location.href = '/admin/' + hash;
-    }
-  }
-</script>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,5 +60,6 @@
       });
     }
   </script>
+
 </body>
 </html>
