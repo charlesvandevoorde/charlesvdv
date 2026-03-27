@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ lang | default('fr') }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ metaDesc | default('Portfolio de Charles Van de Voorde — Expert Projets Digitaux & IA') }}" />
+  <title>{{ pageTitle | default('Charles Van de Voorde') }}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets-source/vdv_logo_square.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+
+  {% include "nav.njk" %}
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  {% include "footer.njk" %}
+
+  <!-- JS -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

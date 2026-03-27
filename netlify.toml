@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/"
+  to = "/fr/"
+  status = 302
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+[dev]
+  command = "npm start"
+  port = 8080

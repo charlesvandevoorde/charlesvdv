@@ -1,0 +1,64 @@
+---
+layout: base.njk
+lang: fr
+pagination:
+  data: collections.projets_fr
+  size: 1
+  alias: projet
+permalink: /fr/projets/{{ projet.fileSlug }}/index.html
+eleventyComputed:
+  pageTitle: "{{ projet.data.titre }} — Charles Van de Voorde"
+  metaDesc: "{{ projet.data.description }}"
+---
+
+<div class="project-detail">
+  <div class="container" style="max-width: 860px;">
+
+    <a href="/fr/#portfolio" class="project-detail__back">← Retour aux projets</a>
+
+    <p class="section-label">{{ projet.data.categorie }}</p>
+    <h1 style="font-family: var(--font-title); margin-bottom: 1rem;">{{ projet.data.titre }}</h1>
+    <p style="color:var(--color-text-muted); font-size:1.1rem; margin-bottom:2.5rem;">{{ projet.data.description }}</p>
+
+    {% if projet.data.image %}
+      <img src="{{ projet.data.image }}" alt="{{ projet.data.titre }}" class="project-detail__img" />
+    {% endif %}
+
+    {% if projet.data.contexte %}
+    <div class="project-detail__section fade-in">
+      <h3>Contexte</h3>
+      <p>{{ projet.data.contexte }}</p>
+    </div>
+    {% endif %}
+
+    {% if projet.data.problematique %}
+    <div class="project-detail__section fade-in">
+      <h3>Problématique</h3>
+      <p>{{ projet.data.problematique }}</p>
+    </div>
+    {% endif %}
+
+    {% if projet.data.solution %}
+    <div class="project-detail__section fade-in">
+      <h3>Solution proposée</h3>
+      <p>{{ projet.data.solution }}</p>
+    </div>
+    {% endif %}
+
+    {% if projet.data.resultats %}
+    <div class="project-detail__section fade-in">
+      <h3>Résultats</h3>
+      <p>{{ projet.data.resultats }}</p>
+    </div>
+    {% endif %}
+
+    {% if projet.data.url_externe %}
+    <div style="margin-top:2rem;">
+      <a href="{{ projet.data.url_externe }}" target="_blank" rel="noopener" class="btn btn--primary">
+        Voir le projet ↗
+      </a>
+    </div>
+    {% endif %}
+
+  </div>
+</div>

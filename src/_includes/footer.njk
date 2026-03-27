@@ -1,0 +1,22 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <p>
+        {% if lang == 'fr' %}
+          © {{ "now" | date("yyyy") if false else 2025 }} Charles Van de Voorde · Fait avec ♥ · <a href="mailto:charles.vandevoorde@gmail.com">charles.vandevoorde@gmail.com</a>
+        {% elif lang == 'en' %}
+          © 2025 Charles Van de Voorde · Made with ♥ · <a href="mailto:charles.vandevoorde@gmail.com">charles.vandevoorde@gmail.com</a>
+        {% elif lang == 'pt-br' %}
+          © 2025 Charles Van de Voorde · Feito com ♥ · <a href="mailto:charles.vandevoorde@gmail.com">charles.vandevoorde@gmail.com</a>
+        {% endif %}
+      </p>
+      <p>
+        <a href="https://www.linkedin.com/in/charles-van-de-voorde/" target="_blank" rel="noopener">LinkedIn</a>
+        &nbsp;·&nbsp;
+        <a href="/public/cv-charles-vdv.pdf" target="_blank" rel="noopener">
+          {% if lang == 'fr' %}Télécharger le CV{% elif lang == 'en' %}Download Resume{% else %}Baixar Currículo{% endif %}
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
